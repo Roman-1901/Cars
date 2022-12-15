@@ -1,0 +1,229 @@
+package transport;
+
+public class Car {
+    private final String brand;
+    private final String model;
+    private double engineVolume;
+    private String color;
+    private final int year;
+    private final String country;
+    private String transmission;
+    private final String bodyType;
+    private String regNumber;
+    private final int countSeat;
+    private String carTyre;
+    private boolean season;
+
+    public Car(String brand, String model, double engineVolume, String color, int year, String country, String transmission, String bodyType, String regNumber, int countSeat, boolean season) {
+        String def = "default";
+        if (brand == null || brand.isBlank()) {
+            brand = def;
+        }
+        if (model == null || model.isBlank()) {
+            model = def;
+        }
+        if (country == null || country.isBlank()) {
+            country = def;
+        }
+        if (engineVolume <= 0) {
+            engineVolume = 1.5;
+        }
+        if (color == null || color.isBlank()) {
+            color = "белый";
+        }
+        if (year <= 0) {
+            year = 2000;
+        }
+        if (transmission == null || transmission.isBlank()) {
+            transmission = "механика";
+        }
+        if (bodyType == null || bodyType.isBlank()) {
+            bodyType = def;
+        }
+        if (regNumber == null || regNumber.isBlank()) {
+            regNumber = "x000xx000";
+        }
+        if (countSeat < 2) {
+            countSeat = 2;
+        } else if (countSeat > 8) {
+            countSeat = 8;
+        }
+        if (season == true) {
+            this.carTyre = "летняя";
+        } else {
+            this.carTyre = "зимняя";
+        }
+        this.brand = brand;
+        this.model = model;
+        this.engineVolume = engineVolume;
+        this.color = color;
+        this.year = year;
+        this.country = country;
+        this.transmission = transmission;
+        this.bodyType = bodyType;
+        this.regNumber = regNumber;
+        this.countSeat = countSeat;
+        this.season = season;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getEngineVolume() {
+        return engineVolume;
+    }
+
+    public void setEngineVolume(double engineVolume) {
+        if (engineVolume <= 0) {
+            this.engineVolume = 1.5;
+        } else {
+            this.engineVolume = engineVolume;
+        }
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        if (color == null || color.isBlank()) {
+            this.color = "белый";
+        } else {
+            this.color = color;
+        }
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(String transmission) {
+        if (transmission == null || transmission.isBlank()) {
+            this.transmission = "Механика";
+        } else {
+            this.transmission = transmission;
+        }
+
+    }
+
+    public String getBodyType() {
+        return bodyType;
+    }
+
+    public String getRegNumber() {
+        return regNumber;
+    }
+
+    public void setRegNumber(String regNumber) {
+        if (regNumber == null || regNumber.isBlank()) {
+            this.regNumber = "x000xx000";
+        } else {
+            this.regNumber = regNumber;
+        }
+    }
+
+    public int getCountSeat() {
+        return countSeat;
+    }
+
+    public String getCarTyre() {
+        return carTyre;
+    }
+
+    public void setCarTyre(boolean season) {
+        if (season == true) {
+            this.carTyre = "летняя";
+        } else {
+            this.carTyre = "зимняя";
+        }
+    }
+
+    public void setCarTyre(int month) {
+        if (month > 4 && month < 11 || month < 1 || month > 12) {
+            this.season = true;
+        } else {
+            this.season = false;
+        }
+        setCarTyre(this.season);
+    }
+
+    private boolean checkLetter(String regNumber) {
+        boolean check = false;
+        regNumber = regNumber.toLowerCase();
+        char[] letters = new char[]{'а', 'в', 'е', 'к', 'м', 'н', 'о', 'р', 'с', 'т', 'у', 'х'};
+        for (int i = 0; i < letters.length; i++) {
+            if (letters[i] == regNumber.charAt(0)) {
+                check = true;
+                break;
+            } else {
+                check = false;
+            }
+        }
+        if (check) {
+            for (int i = 0; i < letters.length; i++) {
+                if (letters[i] == regNumber.charAt(4)) {
+                    check = true;
+                    break;
+                } else {
+                    check = false;
+                }
+            }
+        }
+        if (check) {
+            for (int i = 0; i < letters.length; i++) {
+                if (letters[i] == regNumber.charAt(5)) {
+                    check = true;
+                    break;
+                } else {
+                    check = false;
+                }
+            }
+        }
+
+        return check;
+    }
+
+    private boolean checkNumber(String regNumber) {
+        boolean check = false;
+        if (Character.isDigit(regNumber.charAt(1)) && Character.isDigit(regNumber.charAt(2)) && Character.isDigit(regNumber.charAt(3)) &&
+                Character.isDigit(regNumber.charAt(6)) && Character.isDigit(regNumber.charAt(7)) && Character.isDigit(regNumber.charAt(8))) {
+         check = true;
+        }
+        return check;
+    }
+
+    public boolean checkNum() {
+        boolean check = false;
+        boolean checkLetter = false;
+        boolean checkNum = false;
+        if (regNumber.length() == 9 || regNumber != null || !regNumber.isBlank()) {
+            checkLetter = checkLetter(regNumber);
+            checkNum = checkNumber(regNumber);
+        }
+        if (checkLetter && checkNum) {
+            check = true;
+        }
+        return check;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Данные автомобиля: бренд: " + brand + ", модель: " + model + ", объем двигателя: " + engineVolume + ", цвет: " + color + ", год выпуска: " + year + ", страна: " + country +
+                ", коробка передач: " + transmission + ", тип кузова: " + bodyType + ", регистрационный номер: " + regNumber + ", количество мест: " + countSeat +
+                ", резина: " + carTyre + ".";
+    }
+}
