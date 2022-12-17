@@ -209,7 +209,7 @@ public class Car {
         boolean check = false;
         boolean checkLetter = false;
         boolean checkNum = false;
-        if (regNumber.length() == 9 && regNumber != null && !regNumber.isBlank()) {
+        if (regNumber.length() == 9) {
             checkLetter = checkLetter(regNumber);
         }
         if (checkLetter) {
