@@ -1,5 +1,12 @@
 package transport;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+import static java.util.concurrent.TimeUnit.DAYS;
+
+
 public class Car {
 
     public class Key {
@@ -32,6 +39,74 @@ public class Car {
             return getRemoteEngStart() + ", " + getNotKeyAccess();
         }
     }
+
+    public class Insurance {
+        private int countDay;
+        private final LocalDate expireDate;
+        private double price;
+        private int num;
+
+        public Insurance(int countDay, double price, int num) {
+
+            this.expireDate = LocalDate.now().plusDays(countDay);
+
+            if (price == 0 || price < 0) {
+                price = 1000.00;
+            }
+            this.price = price;
+
+            if(num < 0) {
+                num = Math.abs(num);
+            }
+            int lengthNum = (int)Math.log10(num) + 1;
+            if (lengthNum != 9) {
+                num = 0;
+            }
+            this.num = num;
+        }
+
+        public int getCountDay() {
+           long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), expireDate);
+           countDay = (int) daysBetween;
+            return countDay;
+        }
+
+        public LocalDate getExpireDate() {
+            return expireDate;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public String checkInsurance() {
+            int check = getCountDay();
+            if (check > 0) {
+                return "Страховка действующая";
+            } else {
+                return "Страховка просрочена, необходимо оформлять новую";
+            }
+        }
+
+        public String checkInsuranceNum() {
+            if (getNum() == 0) {
+                return "Номер страховки некорректный";
+            } else {
+                return "Номер страховки корректный";
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "Страховка \n" +
+                    "Дата окончания страховки " + expireDate + ", Цена " + price + ", Номер " + num + "\n"+
+                    "Срок окончания страховки " + getCountDay() + " дней.";
+        }
+    }
     private final String brand;
     private final String model;
     private double engineVolume;
@@ -45,6 +120,7 @@ public class Car {
     private String carTyre;
     private boolean season;
     private Key key;
+    private Insurance insurance;
 
     public Car(String brand, String model, double engineVolume, String color, int year, String country, String transmission, String bodyType, String regNumber, int countSeat, boolean season) {
         String def = "default";
@@ -202,6 +278,16 @@ public class Car {
         }
     }
 
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        if (this.insurance == null) {
+            this.insurance = insurance;
+        }
+    }
+
     private boolean checkLetter(String regNumber) {
         boolean check = false;
         regNumber = regNumber.toLowerCase();
@@ -268,6 +354,6 @@ public class Car {
     public String toString() {
         return "Данные автомобиля: бренд: " + brand + ", модель: " + model + ", объем двигателя: " + engineVolume + ", цвет: " + color + ", год выпуска: " + year + ", страна: " + country +
                 ", коробка передач: " + transmission + ", тип кузова: " + bodyType + ", регистрационный номер: " + regNumber + ", количество мест: " + countSeat +
-                ", резина: " + carTyre + ", "+ key + ".";
+                ", резина: " + carTyre + ".";
     }
 }

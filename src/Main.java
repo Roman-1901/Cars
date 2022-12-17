@@ -1,5 +1,7 @@
 import transport.Car;
 
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
  //       Car bmw = new Car("BMW", "Z8", 3.0, "черный", 2021, "Германия");
@@ -13,10 +15,19 @@ public class Main {
         Car.Key audiKey2 = audi.new Key(true, true);
         audi.setKey(audiKey);
         audi.setKey(audiKey2); //срабатывает первый сеттер, второй уже не работает, можно только один раз задать
+        System.out.println(audi.getKey().getRemoteEngStart());
+        System.out.println(audi.getKey().getNotKeyAccess());
+
+
+        Car.Insurance audiInsurance = audi.new Insurance(200, 1000.00, 55639);
+        audi.setInsurance(audiInsurance);
+        System.out.println(audi.getInsurance());
+        System.out.println(audi.getInsurance().checkInsurance());
+        System.out.println(audi.getInsurance().checkInsuranceNum());
 
 
 //        System.out.println(granta);
-        System.out.println(audi);
+//        System.out.println(audi);
 //        System.out.println(hyundai);
 //        hyundai.setCarTyre(1); // смена резины по указанию номера месяца
 //        System.out.println(hyundai.checkNum()); // проверка номера выдаст true
