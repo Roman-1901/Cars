@@ -40,7 +40,7 @@ public class Car {
         }
     }
 
-    public class Insurance {
+    public static class Insurance {
         private int countDay;
         private final LocalDate expireDate;
         private double price;
@@ -102,8 +102,7 @@ public class Car {
 
         @Override
         public String toString() {
-            return "Страховка " + brand + ", " + model +"\n" +
-                    "Дата окончания страховки " + expireDate + ", Цена " + price + ", Номер " + num + "\n"+
+            return "Дата окончания страховки " + expireDate + ", Цена " + price + ", Номер " + num + "\n"+
                     "Срок окончания страховки " + getCountDay() + " дней.\n"
                     + checkInsurance() + "\n"
                     + checkInsuranceNum();
@@ -174,6 +173,8 @@ public class Car {
         this.regNumber = regNumber;
         this.countSeat = countSeat;
         this.season = season;
+        Car.Key keyTemp = new Key(false, false);
+        this.key = keyTemp;
     }
 
     public String getBrand() {
@@ -275,9 +276,7 @@ public class Car {
     }
 
     public void setKey(Key key) {
-        if (this.key == null) {
             this.key = key;
-        }
     }
 
     public Insurance getInsurance() {
@@ -354,6 +353,8 @@ public class Car {
     public String toString() {
         return "Данные автомобиля: бренд: " + brand + ", модель: " + model + ", объем двигателя: " + engineVolume + ", цвет: " + color + ", год выпуска: " + year + ", страна: " + country +
                 ", коробка передач: " + transmission + ", тип кузова: " + bodyType + ", регистрационный номер: " + regNumber + ", количество мест: " + countSeat +
-                ", резина: " + carTyre + ".";
+                ", резина: " + carTyre + ".\n"+
+                "Доп.опции: "+ key + "\n"+
+                "Данные о страховке: "+ insurance;
     }
 }

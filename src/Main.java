@@ -25,24 +25,20 @@ public class Main {
         System.out.println();
 
         //Класс Key
-        Car.Key audiKey = audi.new Key(true, false);
-        Car.Key audiKey2 = audi.new Key(true, true);
-        audi.setKey(audiKey);
-        audi.setKey(audiKey2); //срабатывает первый сеттер класса Key, второй уже не сработает, можно только единожды задать
+        audi.setKey(audi.new Key(true, true));
         System.out.println(audi);
-        System.out.println(audi.getKey().getRemoteEngStart());
-        System.out.println(audi.getKey().getNotKeyAccess());
         System.out.println();
 
         //Страховка
-        Car.Insurance audiInsurance = audi.new Insurance(365, 5000.00, 449622939);
-        audi.setInsurance(audiInsurance);
-        System.out.println(audi.getInsurance());
+        Car.Insurance hyundaiInsurance = new Car.Insurance(365, 5000.00, 449622939);
+        hyundai.setInsurance(hyundaiInsurance);
+        hyundai.setKey(hyundai.new Key(true, false));
+        System.out.println(hyundai);
 
         System.out.println();
-        Car.Insurance grantaInsurance = granta.new Insurance(-10, 0, 4568);
+        Car.Insurance grantaInsurance = new Car.Insurance(-10, 0, 4568);
         granta.setInsurance(grantaInsurance);
-        System.out.println(granta.getInsurance());
+        System.out.println(granta);
 
 
     }
