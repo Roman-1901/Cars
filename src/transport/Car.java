@@ -58,8 +58,7 @@ public class Car {
             if(num < 0) {
                 num = Math.abs(num);
             }
-            int lengthNum = (int)Math.log10(num) + 1;
-            if (lengthNum != 9) {
+            if (String.valueOf(num).length() != 9) {
                 num = 0;
             }
             this.num = num;
