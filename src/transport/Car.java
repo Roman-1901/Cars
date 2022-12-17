@@ -211,9 +211,11 @@ public class Car {
         boolean checkNum = false;
         if (regNumber.length() == 9 && regNumber != null && !regNumber.isBlank()) {
             checkLetter = checkLetter(regNumber);
+        }
+        if (checkLetter) {
             checkNum = checkNumber(regNumber);
         }
-        if (checkLetter && checkNum) {
+        if (checkNum) {
             check = true;
         }
         return check;
