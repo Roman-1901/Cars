@@ -8,30 +8,43 @@ public class Main {
 //        Car kia = new Car("Kia", "Sportage 4-го поколения", 2.4, "красный", 2018, "Южная Корея");
         Car granta = new Car("Lada", "Granta", 1.7, "желтый", 2015, "Россия", "  ", "седан", "а336вщ023", 5, true);
         Car audi = new Car("Audi", "A8 50 L TDI quattro", 3.0, "черный", 2020, "Германия", "автомат", "хэтчбэк", "у927сс030", 5, false);
-        Car hyundai = new Car("Hyundai", "Avante", 1.6, "оранжевый", 2016, "Южная Корея", "автомат", "седан", "н057рк050", 5, true);
+        Car hyundai = new Car("Hyundai", "Avante", 1.6, "оранжевый", 2016, "Южная Корея", "автомат", "седан", "н057рк050", 0, true);
 
+
+
+        System.out.println(granta);
         System.out.println(audi);
+        System.out.println(hyundai);
+        System.out.println();
+        System.out.println("Резина у Хендай - " + hyundai.getCarTyre());
+        hyundai.setCarTyre(1); // смена резины по указанию номера месяца
+        System.out.println("Резина после смены месяца у Хендай - " + hyundai.getCarTyre());
+        System.out.println();
+        System.out.println("Проверка номера у Ауди "+ audi.getRegNumber() +", - " + audi.checkNum()); // проверка номера выдаст true
+        System.out.println("Проверка номера у Лады Гранта " + granta.getRegNumber() + ", - " + granta.checkNum()); // проверка номера выдаст false, так как номер некорректен, имеется российская буква, отсутсвующая в латинской раскладке
+        System.out.println();
+
+        //Класс Key
         Car.Key audiKey = audi.new Key(true, false);
         Car.Key audiKey2 = audi.new Key(true, true);
         audi.setKey(audiKey);
-        audi.setKey(audiKey2); //срабатывает первый сеттер, второй уже не работает, можно только один раз задать
+        audi.setKey(audiKey2); //срабатывает первый сеттер класса Key, второй уже не сработает, можно только единожды задать
+        System.out.println(audi);
         System.out.println(audi.getKey().getRemoteEngStart());
         System.out.println(audi.getKey().getNotKeyAccess());
+        System.out.println();
 
-
-        Car.Insurance audiInsurance = audi.new Insurance(200, 1000.00, 55639);
+        //Страховка
+        Car.Insurance audiInsurance = audi.new Insurance(365, 5000.00, 449622939);
         audi.setInsurance(audiInsurance);
         System.out.println(audi.getInsurance());
-        System.out.println(audi.getInsurance().checkInsurance());
-        System.out.println(audi.getInsurance().checkInsuranceNum());
+
+        System.out.println();
+        Car.Insurance grantaInsurance = granta.new Insurance(-10, 0, 4568);
+        granta.setInsurance(grantaInsurance);
+        System.out.println(granta.getInsurance());
 
 
-//        System.out.println(granta);
-//        System.out.println(audi);
-//        System.out.println(hyundai);
-//        hyundai.setCarTyre(1); // смена резины по указанию номера месяца
-//        System.out.println(hyundai.checkNum()); // проверка номера выдаст true
-//        System.out.println(granta.checkNum()); // проверка номера выдаст false, так как номер некорректен, имеется российская буква, отсутсвующая в латинской раскладке
     }
 
 }

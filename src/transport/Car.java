@@ -102,9 +102,11 @@ public class Car {
 
         @Override
         public String toString() {
-            return "Страховка \n" +
+            return "Страховка " + brand + ", " + model +"\n" +
                     "Дата окончания страховки " + expireDate + ", Цена " + price + ", Номер " + num + "\n"+
-                    "Срок окончания страховки " + getCountDay() + " дней.";
+                    "Срок окончания страховки " + getCountDay() + " дней.\n"
+                    + checkInsurance() + "\n"
+                    + checkInsuranceNum();
         }
     }
     private final String brand;
@@ -283,9 +285,7 @@ public class Car {
     }
 
     public void setInsurance(Insurance insurance) {
-        if (this.insurance == null) {
             this.insurance = insurance;
-        }
     }
 
     private boolean checkLetter(String regNumber) {
