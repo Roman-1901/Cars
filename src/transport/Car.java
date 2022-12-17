@@ -1,6 +1,37 @@
 package transport;
 
 public class Car {
+
+    public class Key {
+       private boolean remoteEngStart;
+       private boolean notKeyAccess;
+
+        public Key(boolean remoteEngStart, boolean notKeyAccess) { //в данном случае я не вижу смысла делать проверку на пустоту значения,
+            this.remoteEngStart = remoteEngStart;      //т.к. подобные параметры из пользовательского интерфейса обычно передаются в виде чекбокса, а не ручным вводом
+            this.notKeyAccess = notKeyAccess;
+        }
+
+        public String getRemoteEngStart() {
+            if (remoteEngStart) {
+                return "Удаленный запуск двигателя имеется";
+            } else {
+                return "Удаленный запуск двигателя отсутствует";
+            }
+        }
+
+        public String getNotKeyAccess() {
+            if (notKeyAccess) {
+                return "Бесключевой доступ имеется";
+            } else {
+                return "Бесключевой доступ отсутствует";
+            }
+        }
+
+        @Override
+        public String toString() {
+            return getRemoteEngStart() + ", " + getNotKeyAccess();
+        }
+    }
     private final String brand;
     private final String model;
     private double engineVolume;
@@ -13,6 +44,7 @@ public class Car {
     private final int countSeat;
     private String carTyre;
     private boolean season;
+    private Key key;
 
     public Car(String brand, String model, double engineVolume, String color, int year, String country, String transmission, String bodyType, String regNumber, int countSeat, boolean season) {
         String def = "default";
@@ -160,6 +192,16 @@ public class Car {
         setCarTyre(this.season);
     }
 
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        if (this.key == null) {
+            this.key = key;
+        }
+    }
+
     private boolean checkLetter(String regNumber) {
         boolean check = false;
         regNumber = regNumber.toLowerCase();
@@ -226,6 +268,6 @@ public class Car {
     public String toString() {
         return "Данные автомобиля: бренд: " + brand + ", модель: " + model + ", объем двигателя: " + engineVolume + ", цвет: " + color + ", год выпуска: " + year + ", страна: " + country +
                 ", коробка передач: " + transmission + ", тип кузова: " + bodyType + ", регистрационный номер: " + regNumber + ", количество мест: " + countSeat +
-                ", резина: " + carTyre + ".";
+                ", резина: " + carTyre + ", "+ key + ".";
     }
 }
