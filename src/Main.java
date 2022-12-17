@@ -34,12 +34,13 @@ public class Main {
         hyundai.setInsurance(hyundaiInsurance);
         hyundai.setKey(hyundai.new Key(true, false));
         System.out.println(hyundai);
+        System.out.println(hyundaiInsurance.checkInsuranceNum()); // проверка номера страховки
 
         System.out.println();
         Car.Insurance grantaInsurance = new Car.Insurance(-10, 0, 4568);
         granta.setInsurance(grantaInsurance);
         System.out.println(granta);
-
+        System.out.println(grantaInsurance.checkInsuranceNum()); // проверка номера страховки
 
     }
 

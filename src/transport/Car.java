@@ -18,7 +18,7 @@ public class Car {
             this.notKeyAccess = notKeyAccess;
         }
 
-        public String getRemoteEngStart() {
+        private String getRemoteEngStart() {
             if (remoteEngStart) {
                 return "Удаленный запуск двигателя имеется";
             } else {
@@ -26,7 +26,7 @@ public class Car {
             }
         }
 
-        public String getNotKeyAccess() {
+        private String getNotKeyAccess() {
             if (notKeyAccess) {
                 return "Бесключевой доступ имеется";
             } else {
@@ -64,21 +64,21 @@ public class Car {
             this.num = num;
         }
 
-        public int getCountDay() {
+        private int getCountDay() {
            long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), expireDate);
            countDay = (int) daysBetween;
             return countDay;
         }
 
-        public LocalDate getExpireDate() {
+        private LocalDate getExpireDate() {
             return expireDate;
         }
 
-        public double getPrice() {
+        private double getPrice() {
             return price;
         }
 
-        public int getNum() {
+        private int getNum() {
             return num;
         }
 
@@ -103,8 +103,7 @@ public class Car {
         public String toString() {
             return "Дата окончания страховки " + expireDate + ", Цена " + price + ", Номер " + num + "\n"+
                     "Срок окончания страховки " + getCountDay() + " дней.\n"
-                    + checkInsurance() + "\n"
-                    + checkInsuranceNum();
+                    + checkInsurance();
         }
     }
     private final String brand;
@@ -156,7 +155,7 @@ public class Car {
         } else if (countSeat > 8) {
             countSeat = 8;
         }
-        if (season == true) {
+        if (season) {
             this.carTyre = "летняя";
         } else {
             this.carTyre = "зимняя";
