@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 import static java.util.concurrent.TimeUnit.DAYS;
 
 
-public class Car {
+public class Car extends Transport{
 
     public class Key {
        private boolean remoteEngStart;
@@ -106,12 +106,9 @@ public class Car {
                     + checkInsurance();
         }
     }
-    private final String brand;
-    private final String model;
+
     private double engineVolume;
-    private String color;
-    private final int year;
-    private final String country;
+
     private String transmission;
     private final String bodyType;
     private String regNumber;
@@ -121,31 +118,17 @@ public class Car {
     private Key key;
     private Insurance insurance;
 
-    public Car(String brand, String model, double engineVolume, String color, int year, String country, String transmission, String bodyType, String regNumber, int countSeat, boolean season) {
-        String def = "default";
-        if (brand == null || brand.isBlank()) {
-            brand = def;
-        }
-        if (model == null || model.isBlank()) {
-            model = def;
-        }
-        if (country == null || country.isBlank()) {
-            country = def;
-        }
+    public Car(String brand, String model, double engineVolume, int maxSpeed, String color, int year, String country, String transmission, String bodyType, String regNumber, int countSeat, boolean season) {
+        super(brand, model, color, year, country, maxSpeed);
         if (engineVolume <= 0) {
             engineVolume = 1.5;
         }
-        if (color == null || color.isBlank()) {
-            color = "белый";
-        }
-        if (year <= 0) {
-            year = 2000;
-        }
+
         if (transmission == null || transmission.isBlank()) {
             transmission = "механика";
         }
         if (bodyType == null || bodyType.isBlank()) {
-            bodyType = def;
+            bodyType = "default";
         }
         if (regNumber == null || regNumber.isBlank()) {
             regNumber = "x000xx000";
@@ -160,12 +143,7 @@ public class Car {
         } else {
             this.carTyre = "зимняя";
         }
-        this.brand = brand;
-        this.model = model;
         this.engineVolume = engineVolume;
-        this.color = color;
-        this.year = year;
-        this.country = country;
         this.transmission = transmission;
         this.bodyType = bodyType;
         this.regNumber = regNumber;
@@ -175,13 +153,9 @@ public class Car {
         this.key = keyTemp;
     }
 
-    public String getBrand() {
-        return brand;
-    }
 
-    public String getModel() {
-        return model;
-    }
+
+
 
     public double getEngineVolume() {
         return engineVolume;
@@ -195,25 +169,8 @@ public class Car {
         }
     }
 
-    public String getColor() {
-        return color;
-    }
 
-    public void setColor(String color) {
-        if (color == null || color.isBlank()) {
-            this.color = "белый";
-        } else {
-            this.color = color;
-        }
-    }
 
-    public int getYear() {
-        return year;
-    }
-
-    public String getCountry() {
-        return country;
-    }
 
     public String getTransmission() {
         return transmission;
@@ -349,7 +306,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Данные автомобиля: бренд: " + brand + ", модель: " + model + ", объем двигателя: " + engineVolume + ", цвет: " + color + ", год выпуска: " + year + ", страна: " + country +
+        return "Данные автомобиля: бренд: " + getBrand() + ", модель: " + getModel() + ", объем двигателя: " + engineVolume + ", максимальаня скорость: " + getMaxSpeed() + ", цвет: " + getColor() + ", год выпуска: " + getYear() + ", страна: " + getCountry() +
                 ", коробка передач: " + transmission + ", тип кузова: " + bodyType + ", регистрационный номер: " + regNumber + ", количество мест: " + countSeat +
                 ", резина: " + carTyre + ".\n"+
                 "Доп.опции: "+ key + "\n"+
